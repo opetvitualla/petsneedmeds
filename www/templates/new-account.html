@@ -1,0 +1,32 @@
+<ion-view cache-view="false" hide-nav-bar="true" title="{{headerimg}}" class="app-bg" ng-cloak>
+    <ion-header-bar class="header-container">
+      <h1 class="create-acct-title title"><img class="title-image" src="img/header-logo.png" style="height: 40px;margin-top: 2px;"/></h1>
+      <a href="#/intro" class="button-x button button-icon ion-ios-close-empty" style="color:#fff" ng-click="close()"></a>
+    </ion-header-bar>
+
+
+  <ion-content class="new-account account-page" overflow-scroll="false">
+    <div class="row">
+      <p class="roboto create-acct-content"><span>Create Your Account</span><br />
+      Enter your e-mail address</br />
+      to create an account</p>
+    </div>
+    <br>
+    <div class="row">
+      <form id="create-email" name="createEmail" ng-submit="emailCreate(createEmail)" class="side-border"> 
+        <div class="list">
+          <label class="item item-input">
+            <input type="email" placeholder="E-mail address" ng-model="data.email" name="emailAdd" required>
+          </label>
+
+          <div class="error-msg" ng-messages="createEmail.emailAdd.$error" ng-show="createEmail.emailAdd.$touched || error_" role="alert">
+              <div ng-message="required">Required</div>
+              <div ng-message="email">Invalid email!</div>
+          </div>
+          
+          <button class="button button-block button-assertive no-radius">Create your account</button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

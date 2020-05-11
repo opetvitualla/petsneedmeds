@@ -1,0 +1,100 @@
+ <ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+  <ion-header-bar class="header-container">    
+	<h1 class="create-acct-title title white thin roboto"><a href="#/dash-shopping-cart" class="left-arrow" style="color:#fff"></a>{{title}}<a href="#/menu/dash-home" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>              
+  </ion-header-bar>  
+  
+  <ion-content class="dash-page">  	
+  	<div class="cart-shipping">
+  		<label class="item item-input item-select">
+    		<div class="input-label">Please select an address</div>
+    		<select ng-model="idaddress" ng-change="changeAddress(idaddress)">
+  				<option ng-repeat="address in addressid track by $index" value="{{address}}">{{addressalias[$index]}}</option>
+    		</select>        
+  		</label>
+      <div class="error-msg" ng-show="error_">Required</div>
+  		
+  		<form ng-show="fetched">
+  			<div class="list">
+  				<label class="item item-input">
+    				<span class="input-label"><strong>Full name</strong></span>
+    				<input type="text" ng-model="fullname" ng-readonly="fetched">
+  				</label>
+  				<label class="item item-input">
+    				<span class="input-label"><strong>Company</strong></span>
+    				<input type="text" ng-model="specificAdd.company" ng-readonly="fetched">
+  				</label>
+  				<label class="item item-input">
+    				<span class="input-label"><strong>Address</strong></span>
+    				<input type="text" ng-model="specificAdd.address1" ng-readonly="fetched">
+  				</label>
+  				<label class="item item-input">
+    				<span class="input-label"><strong>City/State</strong></span>
+    				<input type="text" ng-model="citystate" ng-readonly="fetched">
+  				</label>
+  				<label class="item item-input">
+    				<span class="input-label"><strong>Country</strong></span>
+    				<input type="text" ng-model="specificAdd.country" ng-readonly="fetched">
+  				</label>
+  				<label class="item item-input">
+    				<span class="input-label"><strong>Phone</strong></span>
+    				<input type="text" ng-model="specificAdd.phone" ng-readonly="fetched">
+  				</label>
+			 </div>
+  		</form> 
+
+      <div class="cart-summary">
+        <div class = "row no-padding">
+            <div class = "col col-50 no-padding">Subtotal</div>
+            <div class = "col no-padding"></div>
+            <div class = "col no-padding align-right">{{total1 | currency}}</div>
+        </div>  
+        <div class = "row no-padding">
+            <div class = "col col-50 no-padding">Shipping &amp; Handling</div>
+            <div class = "col no-padding"></div>
+            <div class = "col no-padding align-right">{{totalshippping | currency}}</div>
+        </div>  
+        <div class = "row no-padding">
+            <div class = "col col-50 no-padding">Estimated Sales Tax</div>
+            <div class = "col no-padding"></div>
+            <div class = "col no-padding align-right">{{totaltax | currency}}</div>
+        </div>  
+
+        <div class = "row no-padding grand-total-container">
+          <div class = "col col-50 no-padding"><span>Grand Total</span></div>
+            <div class = "col no-padding"></div>
+            <div class = "col no-padding align-right">{{grandtotal | currency}}</div>
+        </div>
+
+        <button ng-click="getCarriers(addressused)" style="margin-top: 50px;" class="button button-block button-assertive no-radius" >      
+        Next
+        </button>
+      </div> 		
+
+
+  	</div> 
+  </ion-content>
+  
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item activated" href="#/menu/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>		
+</ion-view> 
+

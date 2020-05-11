@@ -1,0 +1,178 @@
+ <ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+  <ion-header-bar class="header-container">    
+	<h1 class="create-acct-title title white thin roboto"><a href="#/dash-cart-shipping" class="left-arrow" style="color:#fff"></a>{{title}}<a href="#/menu/dash-home" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>              
+  </ion-header-bar> 
+  
+  <ion-content class="dash-page">  	
+  	<div class="cart-shipping">  		
+  		
+  		<div ng-click="paypalmodule()" class="payment-option">  			
+  			<img src="img/paypal.gif" />
+  			<p>
+  				Please click here to use your paypal.
+  			</p>
+  		</div>
+
+  		<div ng-click="authorizemodule()" class="payment-option">
+  			<img width="100%" src="img/aim.png" />
+  			<p>
+  				Click here to use your credit card securely.
+  			</p>
+  		</div>
+
+  		<div class="cart-summary">
+	        <div class = "row no-padding">
+	            <div class = "col col-50 no-padding">Subtotal</div>
+	            <div class = "col no-padding"></div>
+	            <div class = "col no-padding align-right">{{total1 | currency}}</div>
+	        </div>  
+	        <div class = "row no-padding">
+	            <div class = "col col-50 no-padding">Shipping &amp; Handling</div>
+	            <div class = "col no-padding"></div>
+	            <div class = "col no-padding align-right">{{totalshippping | currency}}</div>
+	        </div>  
+	        <div class = "row no-padding">
+	            <div class = "col col-50 no-padding">Estimated Sales Tax</div>
+	            <div class = "col no-padding"></div>
+	            <div class = "col no-padding align-right">{{totaltax | currency}}</div>
+	        </div>  
+
+	        <div class = "row no-padding grand-total-container">
+	          <div class = "col col-50 no-padding"><span>Grand Total</span></div>
+	            <div class = "col no-padding"></div>
+	            <div class = "col no-padding align-right">{{grandtotal | currency}}</div>
+	        </div>	       
+	    </div> 
+	    
+  	</div> 
+  </ion-content>
+
+  <script id="paymentConfirm.html" type="text/ng-template">
+    <ion-modal-view>
+   		 <ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+		  <ion-header-bar class="header-container">    
+			<h1 class="create-acct-title title white thin roboto">Confirm Payment</h1>   
+			<button class="button button-icon ion-ios-close-outline" style="color:white" ng-click="closeModal();"></button>           
+		  </ion-header-bar> 
+		  
+		  <ion-content class="dash-page">  	
+		  	<div class="error-card" ng-show="errorCard"><span>Could not process request. Please verify Credit Card information.</span></div>
+		  	<div class="cart-shipping white">  		
+		  		<p>Here is a short summary of your order.</p>
+		  		<p>
+		  			<span>- The total amount of your order is {{grandtotal | currency}} (tax incl.)</span><br />
+		  			<span>- We accept the following currency to be sent by PayPal: <strong>Dollar</strong></span><br />  			
+		  		</p>
+
+		  		<p>
+		  			<span>Please confirm your order by clicking 'I confirm my order'.</span>
+		  			<button style="background-color: #3AB5FF;color:#fff" ion-button block class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios" ng-click="paynow(grandtotal)">I confirm my order</button>
+		  		</p>
+
+		  	</div> 
+		  </ion-content>
+  	</ion-modal-view>
+  </script>
+
+  <script id="authorizeForm.html" type="text/ng-template">
+    <ion-modal-view>
+   		 <ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+		  <ion-header-bar class="header-container">    
+			<h1 class="create-acct-title title white thin roboto">Credit card information</h1>   
+			<button class="button button-icon ion-ios-close-outline" style="color:white" ng-click="closeModal();"></button>           
+		  </ion-header-bar> 
+		  
+		  <ion-content class="dash-page">  	
+		  	<div class="white">  		
+		  		<div class="error-card" ng-show="errorCard2"><span>Could not process request. Please verify Credit Card information.</span></div>
+		  		<form id="authorizeform1" name="authorizeform1" ng-submit="paycredit(authorizeform1)">
+		  			<div class="list" style="background:#fff;">
+					  <label class="item item-input item-stacked-label">
+					    <span class="input-label">First Name</span>
+					    <input type="text" ng-model="data.aim_firstname" name="first_name" placeholder="John">
+					  </label>
+					  <label class="item item-input item-stacked-label">
+					    <span class="input-label">Last Name</span>
+					    <input type="text" ng-model="data.aim_lastname" name="last_name" placeholder="Doe">
+					  </label>
+					  <label class="item item-input item-select">
+					  	<span class="input-label">Card Type</span>
+					  	<select name="card_type" ng-model="data.aim_cardtype">
+					  		<option>American Express</option>
+					  		<option>Visa</option>
+					  		<option>MasterCard</option>
+					  		<option>Discover</option>
+					  	</select>
+					  </label>
+					  <label class="item item-input item-stacked-label">
+					  	<span class="input-label">Card number</span>
+					  	<input type="text" name="card_number" ng-model="data.aim_cardnumber" placeholder="4222222222222">
+					  </label>
+					  <div class="col col-50 item item-input item-select" style="float:left;">
+					  	<span class="input-label">Month</span>
+					  	<select name="expmonth" ng-model="data.aim_expmonth">
+					  		<option value="01">01</option>
+					  		<option value="02">02</option>
+					  		<option value="03">03</option>
+					  		<option value="04">04</option>
+					  		<option value="05">05</option>
+					  		<option value="06">06</option>
+					  		<option value="07">07</option>
+					  		<option value="08">08</option>
+					  		<option value="09">09</option>
+					  		<option value="10">10</option>
+					  		<option value="11">11</option>
+					  		<option value="12">12</option>
+					  	</select>
+					  </div>
+					  <div class="col col-50 item item-input item-select" style="float:right;">
+					  	<span class="input-label">Year</span>
+					  	<select name="expyear" ng-model="data.aim_expyear">
+					  		<option value="2016">2016</option>
+					  		<option value="2017">2017</option>
+					  		<option value="2018">2018</option>
+					  		<option value="2019">2019</option>
+					  		<option value="2020">2020</option>
+					  		<option value="2021">2021</option>
+					  		<option value="2022">2022</option>
+					  		<option value="2023">2023</option>
+					  		<option value="2024">2024</option>
+					  	</select>
+					  </div>
+					  <label class="item item-input item-stacked-label">
+					  	<span class="input-label">CVV</span>
+					  	<input type="text" name="cvv" ng-model="data.aim_cvv" placeholder="000">
+					  </label>
+					  <button ion-button block class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios">Submit</button>
+					</div>
+		  		</form>
+
+		  	</div> 
+		  </ion-content>
+  	</ion-modal-view>
+  </script>
+  
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item activated" href="#/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>		
+</ion-view> 
+

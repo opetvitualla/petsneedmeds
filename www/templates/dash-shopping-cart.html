@@ -1,0 +1,86 @@
+ <ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+  <ion-header-bar class="header-container">    
+	<h1 class="create-acct-title title white thin roboto"><a href="#/dash-home" class="left-arrow" style="color:#fff"></a>{{title}}<a href="#/menu/dash-home" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>              
+  </ion-header-bar> 
+  
+  <ion-content class="dash-page">   
+  	<div ng-bind-html="hideCartNotification"></div>  
+  	<div class="cart-products" ng-hide="hideCart">
+  		<div class="row cart-product" ng-repeat="product in cartproduct track by $index" >
+ 			<div class="col col-40">
+ 				<img class="full-image" src="https://www.petsneedmeds.com/img/p/{{product.prodId}}-{{product.prodImg}}-customeimage.jpg">
+ 				<input class="cart-remove-btn" type="button" value="Remove" ng-click="removeProduct(product)" />
+ 			</div>
+ 			<div class="col col-60">
+ 				<p class="cart-product-name">
+ 				{{product.prodName}} 					
+ 				</p>
+ 				<span>{{product.prodPrice | currency}} {{product.prodPer}} capsules per order</span>
+ 				<p class="cart-product-qty">
+ 					<span>QTY</span>
+ 					<input type="button" value="-" class="qtyminus" field="quantity" ng-click="deductQty(product.prodId)" />
+ 					<input type="text" name="quantity" ng-model="product.qty" class="qty" readonly="true" />
+ 					<input type="button" value="+" class="qtyplus" field="quantity" ng-click="addQty(product.prodId); addTotal(product.prodPrice,product.qty)" />
+ 				</p>
+ 				<p class="cart-product-qty-price">
+ 					<span>TOTAL</span>
+ 					<input type="text" name="quantityPrice" id="prodTotal{{$index}}" value="{{product.prodPrice * product.qty}}" class="qtyprice" readonly="true" />
+ 				</p>
+
+ 			</div>  			
+		</div>
+
+		<div class="cart-summary">
+			<div class = "row no-padding">
+	   			<div class = "col col-50 no-padding">Subtotal</div>
+	   			<div class = "col no-padding"></div>
+			   	<div class = "col no-padding align-right">{{total1 | currency}}</div>
+			</div>	
+			<div class = "row no-padding">
+	   			<div class = "col col-50 no-padding">Shipping &amp; Handling</div>
+	   			<div class = "col no-padding"></div>
+			   	<div class = "col no-padding align-right">{{totalshippping | currency}}</div>
+			</div>	
+			<div class = "row no-padding">
+	   			<div class = "col col-50 no-padding">Estimated Sales Tax</div>
+	   			<div class = "col no-padding"></div>
+			   	<div class = "col no-padding align-right">{{totaltax | currency}}</div>
+			</div>	
+
+			<div class = "row no-padding grand-total-container">
+				<div class = "col col-50 no-padding"><span>Grand Total</span></div>
+	   			<div class = "col no-padding"></div>
+			   	<div class = "col no-padding align-right">{{total1 | currency}}</div>
+			</div>
+
+			<button ng-click="toshipping(total1)" style="margin-top: 50px;" class="button button-block button-assertive no-radius">
+   				Proceed to Checkout
+			</button>
+		</div>
+  	</div> 
+  </ion-content>
+  
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item" href="#/dash-search-results">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item" href="#/dash-wishlist">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item activated" href="#/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>		
+</ion-view> 
+

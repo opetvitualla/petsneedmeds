@@ -1,0 +1,40 @@
+<ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+  <ion-header-bar class="header-container">    
+	<h1 class="create-acct-title title white thin roboto"><a href="#/dash-home" class="left-arrow" style="color:#fff"></a>{{title}}<a href="#/menu/dash-home" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>              
+  </ion-header-bar> 
+  
+  <ion-content class="dash-page" overflow-scroll="false" has-bouncing="true">  	
+  	<h2 class="sub-title">My Account</h2>
+  	<ul class="list my-account-ul">
+	    <li class="item"><a ng-click="signout()">Sign out</a></li>
+	    <li class="item"><a ng-click="rateapp()">Rate This App</a></li>
+	    <li class="item"><a ng-click="appfeedback()">Send App Feedback</a></li>
+	</ul>	
+	<h2 class="sub-title">Contact Us</h2>  
+	<a class="contact-us-link" href="#/dash-contact-us"><img alt="" src="img/contact-us-icon.png" /></a>
+  </ion-content>
+  
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item" href="#/dash-search-results">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item" href="#/dash-wishlist">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item" href="#/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item activated" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>		
+</ion-view> 
+

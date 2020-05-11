@@ -1,0 +1,45 @@
+ <ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+  <ion-header-bar class="header-container">    
+	<h1 class="create-acct-title title white thin roboto"><a href="#/dash-shopping-cart" class="left-arrow" style="color:#fff"></a>{{title}}<a href="#/menu/dash-home" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>              
+  </ion-header-bar> 
+  
+  <ion-content class="dash-page">  	
+  	<div class="cart-shipping white">  		
+  		<p>Here is a short summary of your order.</p>
+  		<p>
+  			<span>- The total amount of your order is {{grandtotal | currency}} (tax incl.)</span><br />
+  			<span>- We accept the following currency to be sent by PayPal: <strong>Dollar</strong></span><br />  			
+  		</p>
+
+  		<p>
+  			<span>Please confirm your order by clicking 'I confirm my order'.</span>
+  			<button style="background-color: #3AB5FF;color:#fff" ion-button block class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios" ng-click="paynow(grandtotal)">I confirm my order</button>
+  		</p>
+
+  	</div> 
+  </ion-content>
+  
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item activated" href="#/menu/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>		
+</ion-view> 
+

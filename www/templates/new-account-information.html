@@ -1,0 +1,121 @@
+<ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak>
+    <ion-header-bar class="header-container">
+        <h1 class="create-acct-title title white thin roboto"><a href="#/new-account" class="left-arrow" style="color:#fff"></a>Your Personal Information<a href="#/login" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>
+    </ion-header-bar>
+
+  <ion-content class="new-account account-page" overflow-scroll="false">    
+    <div class="row">   
+      <form id="create-email" class="side-border" name="regAcct" ng-submit="registerAcct(regAcct)"> 
+        <div class="list">
+            </label>
+            <div class = "row">
+                <div class = "col col-50" style="color: rgb(255, 255, 255);display: block;width: 100%;font-size: 20px;word-spacing: 5px;">Title: </div>
+                <div class = "col">
+                    <label class="input input-type">
+                        <input type="radio" ng-model="data.gender" value="male" name="gender"  /> Mr.
+                    </label>
+                </div>
+                <div class = "col">
+                    <label class="input input-type">
+                        <input type="radio" ng-model="data.gender" value="female" name="gender"  /> Mrs.
+                    </label>
+                </div>
+            </div>
+
+              <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="First Name" ng-model="data.fname" name="fname" required>
+            </label>                    
+            <div class="error-msg" ng-messages="regAcct.fname.$error" ng-show="regAcct.fname.$touched || error_" role="alert">            
+            <div ng-message="required">Required</div>
+            </div>
+              
+              <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="Last Name" ng-model="data.lname" name="lname" required></label>
+            <div class="error-msg" ng-messages="regAcct.lname.$error" ng-show="regAcct.lname.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+
+              <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="Company Name" ng-model="data.company" name="company"></label>            
+
+              <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="Address" ng-model="data.address" name="address" required></label>
+            <div class="error-msg" ng-messages="regAcct.address.$error" ng-show="regAcct.address.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+
+                <div class="ten-margin"></div>
+        
+
+            <label class="item item-input">
+            <input type="text" placeholder="City" ng-model="data.city" name="city" required></label>
+            <div class="error-msg" ng-messages="regAcct.city.$error" ng-show="regAcct.city.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+        
+                <div class="ten-margin"></div>
+                
+            <label class="item item-input item-select">
+                <div class="input-label">State</div>
+                <select ng-model="data.state" name="state" required>
+                    <option value="">-</option> <option value="1">Alabama</option><option value="2">Alaska</option><option value="3">Arizona</option><option value="4">Arkansas</option><option value="5">California</option><option value="6">Colorado</option><option value="7">Connecticut</option><option value="8">Delaware</option><option value="53">District of Columbia</option><option value="9">Florida</option><option value="10">Georgia</option><option value="11">Hawaii</option><option value="12">Idaho</option><option value="13">Illinois</option><option value="14">Indiana</option><option value="15">Iowa</option><option value="16">Kansas</option><option value="17">Kentucky</option><option value="18">Louisiana</option><option value="19">Maine</option><option value="20">Maryland</option><option value="21">Massachusetts</option><option value="22">Michigan</option><option value="23">Minnesota</option><option value="24">Mississippi</option><option value="25">Missouri</option><option value="26">Montana</option><option value="27">Nebraska</option><option value="28">Nevada</option><option value="29">New Hampshire</option><option value="30">New Jersey</option><option value="31">New Mexico</option><option value="32">New York</option><option value="33">North Carolina</option><option value="34">North Dakota</option><option value="35">Ohio</option><option value="36">Oklahoma</option><option value="37">Oregon</option><option value="38">Pennsylvania</option><option value="51">Puerto Rico</option><option value="39">Rhode Island</option><option value="40">South Carolina</option><option value="41">South Dakota</option><option value="42">Tennessee</option><option value="43">Texas</option><option value="52">US Virgin Islands</option><option value="44">Utah</option><option value="45">Vermont</option><option value="46">Virginia</option><option value="47">Washington</option><option value="48">West Virginia</option><option value="49">Wisconsin</option><option value="50">Wyoming</option>   
+                </select>        
+            </label>
+            <div class="error-msg" ng-messages="regAcct.state.$error" ng-show="regAcct.state.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+
+             <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="Zipcode" ng-model="data.zip" name="zip" required>
+            </label>
+            <div class="error-msg" ng-messages="regAcct.zip.$error" ng-show="regAcct.zip.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+            
+              <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="Phone" ng-model="data.phone" name="phone" required>
+            </label>
+            <div class="error-msg" ng-messages="regAcct.phone.$error" ng-show="regAcct.phone.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+
+                <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="text" placeholder="E-mail" ng-model="data.email" name="email" required>
+            </label>
+            <div class="error-msg" ng-messages="regAcct.email.$error" ng-show="regAcct.email.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            </div>
+
+                <div class="ten-margin"></div>
+
+            <label class="item item-input">
+            <input type="password" placeholder="Password" ng-minlength="6"  ng-model="data.pword" name="pword" required>
+            </label>
+            <div class="error-msg" ng-messages="regAcct.pword.$error" ng-show="regAcct.pword.$touched || error_" role="alert">
+            <div ng-message="required">Required</div>
+            <span class="error" ng-show="regAcct.pword.$error.minlength">
+            Password must be at least 6 characters long!</span>
+            </div>
+
+                  <div class="ten-margin"></div>
+                  
+            <button style="top: 85px;" class="button button-block button-assertive no-radius">Register</button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>

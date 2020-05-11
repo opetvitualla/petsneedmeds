@@ -1,0 +1,60 @@
+<ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak>
+  <ion-header-bar class="header-container">
+	<img alt="" src="img/header-logo.png" style="margin: 0 auto;" />
+  </ion-header-bar>
+
+  <ion-content class="dash-page" overflow-scroll="false">
+  	<form class="side-border search-form" name="searchProducts" ng-submit="search(searchProducts)">
+  	<input type="text" placeholder="Search Product" name="keyword" class="side-border roboto" ng-model="data.keyword" required/>
+  	<div class="error-msg" ng-messages="searchProducts.keyword.$error" ng-show="searchProducts.keyword.$touched || error_" role="alert" style="position: absolute;bottom: -20px;">
+    <div ng-message="required">Required</div>
+    </div>
+  	<input type="submit" name="action" class="search-btn" value="" />
+  	</form>
+
+	<div class="search-blocks">
+		<div class="row">
+			<div class = "col roboto dash-title align-center">
+				I need to control
+			</div>
+		</div>
+		<div class = "row">
+			<div class = "col col-50">
+          		<form name="searchWorms" ng-submit="fetchWorms(searchWorms)">
+          		<input type="hidden" name="worms" ng-model="data.worms" />
+          		<input type="submit" name="action" value= "WORMS" />
+          		</form>
+	        </div>
+	        <div class = "col col-50 search-block">
+	        	<form name="searchFleas" ng-submit="fetchFleas(searchFleas)">
+          		<input type="hidden" name="fleas" ng-model="data.fleas" />
+          		<input type="submit" name="action" value= "FLEAS" />
+          		</form>
+	        </div>
+	    </div>
+	</div>
+  </ion-content>
+
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item activated" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item" href="#/dash-search-results">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item" href="#/dash-wishlist">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item" href="#/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>
+</ion-view>

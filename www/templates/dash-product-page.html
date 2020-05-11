@@ -1,0 +1,51 @@
+<ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak> 
+  <ion-header-bar class="header-container">    
+	<h1 class="create-acct-title title white thin roboto"><a href="#/dash-product-list" class="left-arrow" style="color:#fff"></a>{{title}}<a href="#/menu/dash-home" class="right-arrow" style="color:#fff" ng-show="is_registered"></a></h1>              
+  </ion-header-bar> 
+  
+  <ion-content class="dash-page">  	
+  	
+  	<div class="single-item dash-page-padded">
+		<img class="full-image" src="https://www.petsneedmeds.com/img/p/{{productData.id_product}}-{{productData.id_image}}-large.jpg">			
+		<p>{{productData.name}}</p>
+		<span class="s-prd-price">{{productData.value}} capsules per order {{productData.price | currency}} </span>
+
+		<div class="quantity-block">
+			<form name="proddata" ng-submit="addtocart(proddata, productData.id_product)">
+				Quantity: <input type="text" ng-model="data.quantity" name="quantity" numbers-only />
+				<span>Availability: {{olonly}}</span>
+				<input type="submit" name="action" value="Add to Cart" />
+			</form>
+		</div>
+
+		<div class="s-prd-info">
+			<span class="s-prd-price">Product Detail</span>
+				<div class="s-prd-description" ng-bind-html="productData.description"></div>
+		</div>
+	</div>  
+  </ion-content>
+  
+  <div class="tabs tabs-icon-top">
+	<a class="tab-item activated" href="#/dash-home">
+		<i class="icon ico-home"></i>
+	    Home
+	</a>
+	<a class="tab-item" href="#/dash-search-results">
+		<i class="icon ico-search"></i>
+	    Search
+	</a>
+	<a class="tab-item" href="#/dash-wishlist">
+	   <i class="icon ico-wishlist"></i>
+	   Wishlist
+	</a>
+	<a class="tab-item" href="#/dash-shopping-cart">
+	   <i class="icon ico-cart"></i>
+	   Cart
+	</a>
+	<a class="tab-item" href="#/dash-my-account">
+	   <i class="icon ico-account"></i>
+	   Account
+	</a>
+  </div>		
+</ion-view> 
+

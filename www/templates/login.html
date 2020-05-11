@@ -1,0 +1,43 @@
+<ion-view cache-view="false" hide-nav-bar="true" class="app-bg" ng-cloak>
+    <ion-header-bar class="header-container">
+      <h1 class="create-acct-title title"><img class="title-image" src="img/header-logo.png" /></h1>
+      <a href="#/intro" class="button-x button button-icon ion-ios-close-empty" style="color:#fff" ng-click="close()"></a>
+    </ion-header-bar>
+
+
+  <ion-content class="new-account account-page" overflow-scroll="false">
+    <div class="row" style="text-align:center;display:block;">
+      <p class="roboto text-title">Login to your account</p>
+    </div>
+    <br>
+    <div class="row">
+      <form id="login" name="login" ng-submit="loginAcct(login)" class="side-border"> 
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="Email" ng-model="data.username" name="username" required>
+          </label>
+          <div class="error-msg" ng-messages="login.username.$error" ng-show="login.username.$touched || error_" role="alert">
+          <div ng-message="required">Required</div>          
+          </div>
+
+            <div class="ten-margin"></div>
+
+          <label class="item item-input">
+            <input type="password" placeholder="Password" ng-model="data.password" name="password" required>
+          </label>
+          <div class="error-msg" ng-messages="login.password.$error" ng-show="login.password.$touched || error_" role="alert">
+          <div ng-message="required">Required</div>            
+          </div>
+
+            <div class="ten-margin"></div>
+
+          <div class="row forgot-pword-block align-center">
+            <a href="#/forgot-password">Forgot your password?</a>
+          </div>
+          
+          <button style="top: 125px;" class="button button-block button-assertive no-radius">Login</button>
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</ion-view>
