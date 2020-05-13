@@ -914,12 +914,15 @@ angular.module('starter.controllers', [])
   $scope.paynow = function(price){
     $scope.errorCard = false;
     var total1  = parseFloat(price);
-    var payPalSandboxId = 'AaTQTNLO9FpM2PnulJjdBLNP9l3o4NUW72AD-9ilRDBCYmRqLzC7dnex1FoHZkeE9EVUBYsZcmBs7u3c';
-    var payPalProductionId = 'AZ5fEHG8aLNtSY03IYDUxWeqhP4VAxelmf1VXjkfo1tIOIr7vodVUo_E_BbXdefcIYifbw7JxESXcZza';
+    var payPalSandboxId = 'Aa0S2ymxf9Kw5CzJxtl5AuMX0mYH4Xl8zplqIXXf_iw_CDwW505itVibzvldGCix6Fp3l15WNPGomUXp';
+    // var payPalSandboxId = 'AaTQTNLO9FpM2PnulJjdBLNP9l3o4NUW72AD-9ilRDBCYmRqLzC7dnex1FoHZkeE9EVUBYsZcmBs7u3c';
+    // var payPalProductionId = 'AZ5fEHG8aLNtSY03IYDUxWeqhP4VAxelmf1VXjkfo1tIOIr7vodVUo_E_BbXdefcIYifbw7JxESXcZza';
+    var payPalProductionId = 'AYYM-68wKDk4zi36IxWRcALi3fFBtj4P-0Zhpqg8jH68fguLC0sw6YqJRiQBsUHueUHFzMo3Vv4eV6Y9';
 
-    PaypalService.initPaymentUI(payPalSandboxId,payPalProductionId).then(function () {
-      PaypalService.makePayment(total1, "Total Payment").then(function(success){
-        if(success.response.state === 'approved'){
+    PaypalService.initPaymentUI(payPalSandboxId, payPalProductionId).then(function () {
+      PaypalService.makePayment(total1, "Total Payment").then(function (success) {
+        if (success.response.state === 'approved') {
+
           $ionicLoading.show({
             template: '<ion-spinner class="spinner-calm" icon="android"></ion-spinner>'
           });
@@ -960,7 +963,7 @@ angular.module('starter.controllers', [])
                 window.location.href="#/dash-order-confirmation";
               }
           },function(error) {
-           console.log(error);
+              console.log(error);
               $ionicLoading.hide({
                 template: '<ion-spinner class="spinner-calm" icon="android"></ion-spinner>'
               });
@@ -970,6 +973,7 @@ angular.module('starter.controllers', [])
           $scope.errorCard = true;
           //alert(JSON.stringify(success));
           //error message
+          alert("7")
         }
       },function(error)
       {

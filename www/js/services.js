@@ -128,7 +128,7 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
         // "Sale  == >  immediate payment
         // "Auth" for payment authorization only, to be captured separately at a later time.
         // "Order" for taking an order, with authorization and capture to be done separately at a later time.
-        var payment = new PayPalPayment("" + total, "USD", "" + name, "Sale");
+        var payment = new PayPalPayment("" + total, "USD", "" + name, "sale");
         return payment;
     }
     /**
@@ -174,15 +174,22 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
      * @returns {object} Promise gets resolved on successful payment, rejected on error 
      */
     function makePayment(total, name) {
-
+      
         var defer = $q.defer();
         total = total.toFixed(2);
         $ionicPlatform.ready().then(function () {
+            console.log("test")
             PayPalMobile.renderSinglePaymentUI(createPayment(total, name), function (result) {
+
+                console.log(result);
+
                 $timeout(function () {
                     defer.resolve(result);
                 });
             }, function (error) {
+                    
+                    console.log(error)
+                    
                 $timeout(function () {
                     defer.reject(error);
                 });
