@@ -80,7 +80,9 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
         createPayment: createPayment,
         configuration: configuration,
         onPayPalMobileInit: onPayPalMobileInit,
-        makePayment: makePayment
+        makePayment: makePayment,
+        onPrepareRender: onPrepareRender,
+        onSuccesfulPayment: onSuccesfulPayment,
     };
 
 
@@ -94,16 +96,19 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
      * 
      * @returns {object} Promise paypal ui init done
      */
-    function initPaymentUI(payPalSandboxId, payPalProductionId) {
+    function initPaymentUI() {
 
         init_defer = $q.defer();
         $ionicPlatform.ready().then(function () {
+            var payPalSandboxId = 'AaTQTNLO9FpM2PnulJjdBLNP9l3o4NUW72AD-9ilRDBCYmRqLzC7dnex1FoHZkeE9EVUBYsZcmBs7u3c';
+            var payPalProductionId = 'AZ5fEHG8aLNtSY03IYDUxWeqhP4VAxelmf1VXjkfo1tIOIr7vodVUo_E_BbXdefcIYifbw7JxESXcZza';
 
             var clientIDs = {
                 "PayPalEnvironmentProduction": payPalProductionId,
                 "PayPalEnvironmentSandbox": payPalSandboxId
             };
             PayPalMobile.init(clientIDs, onPayPalMobileInit);
+            // PayPalMobile.init(clientIDs, app.onPayPalMobileInit);
         });
 
         return init_defer.promise;
@@ -128,7 +133,11 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
         // "Sale  == >  immediate payment
         // "Auth" for payment authorization only, to be captured separately at a later time.
         // "Order" for taking an order, with authorization and capture to be done separately at a later time.
-        var payment = new PayPalPayment("" + total, "USD", "" + name, "sale");
+        // var payment = new PayPalPayment("" + total, "USD", "" + name, "sale");
+        // return payment;
+
+        var paymentDetails = new PayPalPaymentDetails(total + "", "0.00", "0.00");
+        var payment = new PayPalPayment(total+"", "USD", name+"", "Sale", paymentDetails);
         return payment;
     }
     /**
@@ -143,15 +152,21 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
      */
     function configuration() {
         // for more options see `paypal-mobile-js-helper.js`
-        var config = new PayPalConfiguration({merchantName: payPalShopName, merchantPrivacyPolicyURL: payPalMerchantPrivacyPolicyURL, merchantUserAgreementURL: payPalMerchantUserAgreementURL, acceptCreditCards: false});
+        // var config = new PayPalConfiguration({ merchantName: payPalShopName, merchantPrivacyPolicyURL: payPalMerchantPrivacyPolicyURL, merchantUserAgreementURL: payPalMerchantUserAgreementURL, acceptCreditCards: false });
+        
+        var config = new PayPalConfiguration({ merchantName: "Pets Need Meds", merchantPrivacyPolicyURL: "https://mytestshop.com/policy", merchantUserAgreementURL: "https://mytestshop.com/agreement" });
+
         return config;
     }
-
+            
+                        
     function onPayPalMobileInit() {
         $ionicPlatform.ready().then(function () {
             // must be called
             // use PayPalEnvironmentNoNetwork mode to get look and feel of the flow
-            PayPalMobile.prepareToRender(payPalEnv, configuration(), function () {
+            // let envv = "PayPalEnvironmentSandbox";
+            let envv = "PayPalEnvironmentProduction";
+            PayPalMobile.prepareToRender(envv, configuration(), function () {
 
                 $timeout(function () {
                     init_defer.resolve();
@@ -178,27 +193,39 @@ app.factory('PaypalService', ['$q', '$ionicPlatform', '$filter', '$timeout',
         var defer = $q.defer();
         total = total.toFixed(2);
         $ionicPlatform.ready().then(function () {
-            console.log("test")
-            PayPalMobile.renderSinglePaymentUI(createPayment(total, name), function (result) {
-
+            PayPalMobile.renderSinglePaymentUI(createPayment(total, "Total Payment"), function (result) {
                 console.log(result);
-
                 $timeout(function () {
                     defer.resolve(result);
                 });
-            }, function (error) {
-                    
-                    console.log(error)
-                    
+                }, function (error) {
+
+                console.log(error)
+
                 $timeout(function () {
                     defer.reject(error);
                 });
-            });
+            },
+            onUserCanceled);
         });
 
         return defer.promise;
     }
+                        
+    function onSuccesfulPayment  (payment) {
+        return JSON.stringify(payment, null, 4);
+    }
+                        
+    function onUserCanceled (result) {
+        console.log(result);
+    }
 
+    function onPrepareRender() {
+        $timeout(function () {
+            init_defer.resolve();
+        });
+    }
+    
     return service;
 }]);
 
